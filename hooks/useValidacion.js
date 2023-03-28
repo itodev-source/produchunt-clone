@@ -14,7 +14,7 @@ const useValidacion = (stateInicial, validar, fn) => {
             }
             guardarSubmitForm(false)
         }
-    }, [])
+    }, [errores])
     
     // Funcion que se ejecuta conforme el usuario escribe algo
     const handleChange = e=> {
@@ -27,7 +27,7 @@ const useValidacion = (stateInicial, validar, fn) => {
     // Funcion que se ejecuta cuando el usuario hace submit
     
     const handleSubmit = e => {
-        e.preventDefault;
+        e.preventDefault();
         const erroresValidacion = validar(valores)
         guardarErrores(erroresValidacion)
         guardarSubmitForm(true)
