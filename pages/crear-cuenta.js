@@ -1,6 +1,6 @@
-import React from "react";
 import { css } from "@emotion/core";
 import Layout from "@/components/layouts/Layout";
+import Router from "next/router";
 import {
   Formulario,
   Campo,
@@ -13,6 +13,7 @@ import firebase from "@/firebase";
 // validaciones
 import useValidacion from "../hooks/useValidacion";
 import validarCrearCuenta from "../validacion/validarCrearCuenta";
+import { useState } from "react";
 
 const STATE_INICIAL = {
   nombre: "",
@@ -21,6 +22,8 @@ const STATE_INICIAL = {
 };
 
 const crearCuenta = () => {
+  const [error, guardarError] = useState(false)
+
   const {
     valores,
     errores,
@@ -35,8 +38,9 @@ const crearCuenta = () => {
   async function crearCuenta() {
     try {
       firebase.registrar(nombre, email, password);
+      Router.push("/")
     } catch (error) {
-      console.log(error)
+      guardarError(error.message)
     }
   }
 
@@ -92,6 +96,7 @@ const crearCuenta = () => {
             />
           </Campo>
           {errores.password && <Error>{errores.password}</Error>}
+          {error && <Error>{error}</Error>}
           <InputSubmit type="submit" value="Crear Cuenta" />
         </Formulario>
       </Layout>
