@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { css } from "@emotion/core";
 import Layout from "@/components/layouts/Layout";
 import Router from "next/router";
@@ -13,7 +14,6 @@ import firebase from "@/firebase";
 // validaciones
 import useValidacion from "../hooks/useValidacion";
 import validarCrearCuenta from "../validacion/validarCrearCuenta";
-import { useState } from "react";
 
 const STATE_INICIAL = {
   nombre: "",
